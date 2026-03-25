@@ -165,15 +165,9 @@ REFERER PROTECTION
 
 const referer = request.headers.get("referer") || "";
 
-const allowedDomains = [
-"https://shorelinerecruitmentgroup.com",
-"https://www.shorelinerecruitmentgroup.com"
-];
-
-const valid = allowedDomains.some(domain => referer.startsWith(domain));
-
-if (!valid) {
-return new Response("OK", { status: 200 });
+// allow empty referer (fetch requests)
+if (referer && !referer.includes("shorelinerecruitmentgroup.com")) {
+  return new Response("OK", { status: 200 });
 }
 
 /* ===============================
