@@ -130,34 +130,7 @@ if (form.get("_gotcha") || form.get("referral_code")) {
 return new Response("Spam blocked", { status: 400 });
 }
 
-/* ===============================
-RECAPTCHA
-=============================== */
 
-const captcha = form.get("g-recaptcha-response");
-
-if (!captcha) {
-return new Response("Captcha missing", { status: 400 });
-}
-
-const verify = await fetch(
-"https://www.google.com/recaptcha/api/siteverify",
-{
-method: "POST",
-headers: { "Content-Type": "application/x-www-form-urlencoded" },
-body: new URLSearchParams({
-secret: env.RECAPTCHA_SECRET,
-response: captcha,
-remoteip: request.headers.get("cf-connecting-ip")
-})
-}
-);
-
-const captchaResult = await verify.json();
-
-if (!captchaResult.success) {
-return new Response("Captcha failed", { status: 400 });
-}
 
 /* ===============================
 REFERER PROTECTION
