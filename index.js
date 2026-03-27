@@ -226,3 +226,7 @@ return new Response("OK", {
     "Access-Control-Allow-Origin": "*"
   }
 });
+
+  }
+
+};
