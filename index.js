@@ -192,30 +192,37 @@ Body: smsBody
 SAVE TO GOOGLE SHEETS
 =============================== */
 
-await appendToSheet(env, [
+try {
 
-new Date().toLocaleString("en-US", { timeZone: "America/Chicago" }), // Timestamp
-name,              // Full Name
-phone,             // Phone
-email,             // Email
-role,              // Role Needed
-message,           // How can we help you?
-referer,           // Page
-request.headers.get("cf-connecting-ip") || "" // IP
+  await appendToSheet(env, [
 
-]);
+    new Date().toLocaleString("en-US", { timeZone: "America/Chicago" }),
+    name,
+    phone,
+    email,
+    role,
+    message,
+    referer,
+    request.headers.get("cf-connecting-ip") || ""
+
+  ]);
+
+  console.log("SHEETS OK");
+
+} catch (err) {
+
+  console.log("SHEETS ERROR:", err.message);
+
+}
+
 
 /* ===============================
-SUCCESS
+SUCCESS (ALWAYS RETURNS)
 =============================== */
 
 return new Response("OK", {
-status: 200,
-headers: {
-"Access-Control-Allow-Origin": "*"
-}
+  status: 200,
+  headers: {
+    "Access-Control-Allow-Origin": "*"
+  }
 });
-
-}
-
-};
