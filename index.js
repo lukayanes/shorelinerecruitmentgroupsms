@@ -179,7 +179,7 @@ Authorization: `Basic ${auth}`,
 "Content-Type": "application/x-www-form-urlencoded"
 },
 body: new URLSearchParams({
-To: "+19139577764",
+To: "+19136365037",
 MessagingServiceSid: env.TWILIO_MESSAGING_SERVICE,
 Body: smsBody
 })
