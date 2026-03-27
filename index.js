@@ -186,45 +186,7 @@ Body: smsBody
 }
 );
 
-/* ===============================
-EMAIL (RESEND)
-=============================== */
 
-await fetch("https://api.resend.com/emails", {
-
-method: "POST",
-
-headers: {
-"Authorization": `Bearer ${env.RESEND_API_KEY}`,
-"Content-Type": "application/json"
-},
-
-body: JSON.stringify({
-
-from: "Shoreline Recruitment Group <leads@shorelinerecruitmentgroup.com>",
-
-to: ["aubrey@summitgroupacq.com"],
-
-subject: "📈 New Shoreline Recruitment Lead",
-
-html: `
-
-<h2>New Shoreline Recruitment Lead</h2>
-
-<p><strong>Name:</strong> ${name}</p>
-<p><strong>Phone:</strong> ${phone}</p>
-<p><strong>Email:</strong> ${email}</p>
-<p><strong>Role Needed:</strong> ${role}</p>
-<p><strong>How can we help you?</strong><br>${message}</p>
-
-<p><strong>Page:</strong> ${referer}</p>
-<p><strong>IP:</strong> ${request.headers.get("cf-connecting-ip")}</p>
-
-`
-
-})
-
-});
 
 /* ===============================
 SAVE TO GOOGLE SHEETS
