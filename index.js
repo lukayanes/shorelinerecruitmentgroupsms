@@ -131,7 +131,33 @@ return new Response("Spam blocked", { status: 400 });
 }
 
 
+const recaptchaToken = form.get("g-recaptcha-response");
 
+if (!recaptchaToken) {
+  return new Response("reCAPTCHA required", { status: 400 });
+}
+
+const recaptchaVerify = await fetch(
+  "https://www.google.com/recaptcha/api/siteverify",
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: new URLSearchParams({
+      secret: env.RECAPTCHA_SECRET,
+      response: recaptchaToken
+    })
+  }
+);
+
+const recaptchaData = await recaptchaVerify.json();
+
+if (!recaptchaData.success) {
+  return new Response("reCAPTCHA failed", { status: 400 });
+}
+
+  
 /* ===============================
 REFERER PROTECTION
 =============================== */
