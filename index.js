@@ -150,6 +150,7 @@ FORM DATA
 const name = form.get("fullName") || "";
 const phone = form.get("phone") || "";
 const email = form.get("email") || "";
+const company = form.get("company") || "";
 const role = form.get("role") || "";
 const message = form.get("message") || "";
 
@@ -163,6 +164,7 @@ const smsBody =
 Name: ${name}
 Phone: ${phone}
 Email: ${email}
+Company/Organization: ${company}
 Role Needed: ${role}
 Message: ${message}`;
 
@@ -200,6 +202,7 @@ try {
     name,
     phone,
     email,
+    company,
     role,
     message,
     referer,
