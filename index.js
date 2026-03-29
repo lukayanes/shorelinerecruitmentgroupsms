@@ -198,7 +198,7 @@ try {
 
   await appendToSheet(env, [
 
-    new Date().toLocaleString("en-US", { timeZone: "America/Chicago" }),
+    new Date().toLocaleString("en-US", { timeZone: "America/New_York" }),
     name,
     phone,
     email,
